@@ -2,8 +2,8 @@
 #include <time.h>
 #include <stdlib.h>
 /**
- * main - Entry point 
- * return: Always 0 (Success)
+ * main - Entry point
+ * Return: Always 0 (Success)
  */
 int main(void)
 {
@@ -28,4 +28,3 @@ int main(void)
 	}
 	return (0);
 }
-
