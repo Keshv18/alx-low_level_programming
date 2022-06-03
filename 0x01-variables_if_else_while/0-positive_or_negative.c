@@ -2,9 +2,9 @@
 #include <time.h>
 #include <stdlib.h>
 /**
- * main-void 
+ * main - void 
  *
- * printf will print a number whether positive or negatavie or zero
+ * printf will print a number whether zero or not
  *
  * return: Always 0(success)
  */
