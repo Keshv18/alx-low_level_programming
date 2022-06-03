@@ -3,8 +3,7 @@
 #include <stdlib.h>
 /**
  * main - void 
- * printf will print a number whether zero or not
- * return: Always 0(success)
+ * return: Always 0 (Success)
  */
 int main(void)
 {
