@@ -1,20 +1,20 @@
-#include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+
 /**
  * main - Entry point
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-        char letter[] = "abcdefghijklmnopqrstuvwyzABCDEFGHIJKLMNOPQRSTUVWYZ";
-        int b;
+	char letters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	int i;
 
-        for (b = 0; b <= 51; b++);
-        {
-                putchar(letters[b]);
-        }
-        putchar('\n');
-        return (0);
+	for (i = 0; i <= 51; i++)
+	{
+		putchar(letters[i]);
+	}
+	putchar('\n');
+	return (0);
 }
-
