@@ -2,11 +2,11 @@
 #include <time.h>
 #include <stdlib.h>
 /**
- * main - void 
+ * main-void 
  *
  * printf will print a number whether positive or negatavie or zero
  *
- * return: 0
+ * return: Always 0(success)
  */
 int main(void)
 {
