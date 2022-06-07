@@ -1,4 +1,4 @@
-#inlcude <stdio.h>
+#include <stdio.h>
 
 /**
  * main - Entry point
@@ -9,10 +9,10 @@ int main(void)
 	int z;
 	char zString[10] = "_putchar\n";
 
-	while (c<10)
+	while (z < 10)
 	{
 		putchar(zString[z]);
-		c++;
+		z++;
 
 	}
 	return (0);
