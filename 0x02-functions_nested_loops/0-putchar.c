@@ -7,11 +7,11 @@
 int main(void)
 {
 	int z;
-	char zString[10] = "_putchar\n";
+	char zString[10] = "\_putchar\n";
 
 	while (z < 10)
 	{
-		putchar(zString[z]);
+		_putchar(zString[z]);
 		z++;
 
 	}
