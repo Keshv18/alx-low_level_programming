@@ -6,16 +6,6 @@
  */
 int main(void)
 {
-	int z;
-	char zString[10] = "_putchar\n";
-
-	while (z < 10)
-	{
-		putchar(zString[z]);
-		z++;
-
-	}
-
-	printf(z);
+	printf("_putchar");
 	return (0);
 }
