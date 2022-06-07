@@ -2,6 +2,7 @@
 
 /**
  * _islower - entry point
+ *@c: integer input
  *
  * Description: check for lowercase character
  * Return: 1 for lowercase and 0 for other
