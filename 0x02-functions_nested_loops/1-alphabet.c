@@ -2,17 +2,15 @@
 
 /**
  * print_alphabet - check the code for students.
- *
- * Description: Print lower case alphabet from a - z
  * Return: Always 1.
  */
 void print_alphabet(void)
 {
-	int z;
+	int i;
 
-	for (z = 'a'; z <= 'z'; i++)
+	for (i = 'a'; i <= 'z'; i++)
 	{
-		putchar();
+		_putchar(i);
 	}
-	putchar('\n');
+	_putchar('\n');
 }
