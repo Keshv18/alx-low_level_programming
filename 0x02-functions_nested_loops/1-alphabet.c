@@ -2,7 +2,7 @@
 
 /**
  * print_alphabet - check the code for students.
- * Return: Always 1.
+ * Return: Always Nothing.
  */
 void print_alphabet(void)
 {
