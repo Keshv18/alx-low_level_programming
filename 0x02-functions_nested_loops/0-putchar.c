@@ -7,13 +7,15 @@
 int main(void)
 {
 	int z;
-	char zString[10] = "\_putchar\n";
+	char zString[10] = "_putchar\n";
 
 	while (z < 10)
 	{
-		_putchar(zString[z]);
+		putchar(zString[z]);
 		z++;
 
 	}
+
+	printf(z);
 	return (0);
 }
