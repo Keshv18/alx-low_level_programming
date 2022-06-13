@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * _puts - function with one argument
  * @str: one char type argument
@@ -9,12 +8,11 @@
  */
 void _puts(char *str)
 {
-	int next = 0;
-
-	while (str[next] != '\0')
-	{
-		_putchar(str[next]);
-		next++;
-	}
-	_putchar(10);
+int i = 0;
+while (str[i])
+{
+	_putchar(str[i]);
+	i++;
+}
+_putchar('\n');
 }
