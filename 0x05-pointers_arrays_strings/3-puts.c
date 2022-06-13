@@ -1,11 +1,11 @@
-#include "main.h"
+#include "holberton.h"
 /**
- * _puts - function with one argument
- * @str: one char type argument
- *
- * Description: print a string follow by a new line to stdout
- * Return: none
- */
+ * _puts - prints a string, followed by a new line,
+ * @str: pointer to the string to print
+ * Return: void
+*/
+
+
 void _puts(char *str)
 {
 int i = 0;
