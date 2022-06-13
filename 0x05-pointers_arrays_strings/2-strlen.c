@@ -1,9 +1,9 @@
 #include "main.h"
-
+#include <stdio.h>
 /**
  * _strlen - check the code for ALX School students.
- * @s: Inputted string pointer
- * Return: Always 0.
+ * @s: Input string pointer
+ * Return: Always 0 (Success)
  */
 int _strlen(char *s)
 {
