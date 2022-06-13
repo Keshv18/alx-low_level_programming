@@ -1,26 +1,32 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <time.h>
 
 /**
-* main - makes something that cracks 101crackme
-*
-* Description: cracking the hacker code
-* Return: returns 0 if no error
-*/
-
+ * main - random password generator for 101-crackme
+ *
+ * Return: always 0
+ */
 int main(void)
 {
-	srand((unsigned int)(time(NULL)));
-	int i;
-	char pass[12];
+char a[100];
+	int r, n, i;
 
-	for(i = 0; i < 12; i++)
+	n = 0;
+	i = 0;
+	srand(time(NULL));
+	while (n < 2645)
 	{
-		pass[i] = 33 + rand() % 94;
+		r = rand() % 122;
+		if (r > 32)
+		{
+			a[i++] = r;
+			n += r;
+		}
 	}
-	pass[i] = '\0';
-	printf("%s\n",pass);
+	a[i++] = (2772 - n);
+	a[i] = '\0';
+	printf("%s", a);
+
+	return (0);
 }
