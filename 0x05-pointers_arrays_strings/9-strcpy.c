@@ -6,15 +6,30 @@
  * @src: 2nd argument char type pointer
  *
  * Description: copies the string to an array
- * Return: na
+ * Return: null
  */
 char *_strcpy(char *dest, char *src)
 {
+	int n = 0;
 	int i;
 
-	for (i = 0; src[i] != '\0'; i++)
+	while (src[n] != '\0')
+	{
+		n++;
+	}
+
+	i = 0;
+	while (i < n && src[i] != '\0')
+	{
 		dest[i] = src[i];
-	for ( ; i < src[i]; i++)
+		i++;
+	}
+
+	i = i;
+	while (i <= n)
+	{
 		dest[i] = '\0';
+		i++;
+	}
 	return (dest);
 }
