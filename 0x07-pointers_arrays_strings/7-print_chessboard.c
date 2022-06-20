@@ -1,23 +1,22 @@
 #include "main.h"
-
 /**
- * print_chessboard - function with 1 argument
- * @a: char type pointer to an array as argument
- *
- * Description: prints the chessboard
- * Return: na
+ * *print_chessboard - description
+ * @a: board
+ * Return: void
  */
-void print_chessboard(char(*a)[8])
-{
-	int b;
-	int c;
 
-	for (b = 0; b < 8; b++)
+
+void print_chessboard(char (*a)[8])
+{
+int i, j;
+
+for (i = 0; i < 8; i++)
+{
+	for (j = 0; j < 8; j++)
 	{
-		for (c = 0; c < 8; c++)
-		{
-			_putchar(a[b][c]);
-		}
-		_putchar('\n');
+		_putchar(a[i][j]);
 	}
+	_putchar('\n');
+}
+
 }
