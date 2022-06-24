@@ -3,7 +3,7 @@
  * Empty file
  * return: 0
  */
-int _abs(int n)
+int _atoi(char *s)
 {
         return (0);
 }
