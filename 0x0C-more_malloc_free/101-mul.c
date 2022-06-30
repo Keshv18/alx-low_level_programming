@@ -1,115 +1,128 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /**
- * _isdigit - checks if character is digit
- * @c: the character to check
- *
- * Return: 1 if digit, 0 otherwise
+ * main - Program that mulplies two positive numbers
+ * @argc: Number of argumenets
+ * @argv: Muldimensional array of arguments
+ * Return: Always 0 (Success)
  */
-int _isdigit(int c)
+int main(int argc, char **argv)
 {
-	return (c >= '0' && c <= '9');
+	char b[15000];
+	char *n = b;
+	int i, j;
+
+	if (argc != 3)
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	if (argv[1][0] == '0' || argv[2][0] == '0')
+	{
+		putchar('0');
+		putchar(10);
+		return (0);
+	}
+
+	n = big_mult(argv[1], argv[2]);
+
+	for (i = 0, j = 0;; i++)
+	{
+		if (n[i] != '0')
+			j = 1;
+		if (j == 1 && n[i] == '\0')
+			break;
+		if (j == 1)
+			putchar(n[i]);
+	}
+	putchar(10);
+
+	return (0);
 }
 
 /**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
- *
- * Return: integer length of string
+ * _calloc - Function that allocates memory for an array
+ * @nmemb: Elements of array
+ * @size: Size of data type
+ * Return: Void
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	unsigned int i;
+	char *p;
+
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+
+	p = malloc(nmemb * size);
+
+	if (p == NULL)
+		return (NULL);
+
+	for (i = 0; i < nmemb * size; i++)
+		p[i] = 0;
+
+	return (p);
+}
+
+/**
+ * _strlen - Function that calculates the length of a string
+ * @s: String to be checked
+ * Return: The lengtht of string or -1 if it fails
  */
 int _strlen(char *s)
 {
-	int i = 0;
+	int i;
 
-	while (*s++)
-		i++;
+	if (s == NULL)
+		return (-1);
+
+	for (i = 0; s[i]; i++)
+		;
+
 	return (i);
 }
 
 /**
- * big_multiply - multiply two big number strings
- * @s1: the first big number string
- * @s2: the second big number string
- *
- * Return: the product big number string
+ * big_mult - Function that multiplies two big numbers
+ * @s1: String big number 1
+ * @s2: String big number 2
+ * Return: a result of the two big numbers
  */
-char *big_multiply(char *s1, char *s2)
+char *big_mult(char *s1, char *s2)
 {
-	char *r;
-	int l1, l2, a, b, c, x;
+	int i, j, k, l, value;
+	char *n;
 
-	l1 = _strlen(s1);
-	l2 = _strlen(s2);
-	r = malloc(a = x = l1 + l2);
-	if (!r)
+	i = _strlen(s1);
+	j = _strlen(s2);
+	k = i + j + 1;
+	n = _calloc(k, sizeof(char));
+	if (n == NULL)
 		printf("Error\n"), exit(98);
-	while (a--)
-		r[a] = 0;
+	n[k - 1] = '\0';
 
-	for (l1--; l1 >= 0; l1--)
+	for (--i; i >= 0; i--)
 	{
-		if (!_isdigit(s1[l1]))
+		if (s1[i] < '0' || s1[i] > '9')
+			free(n), printf("Error\n"), exit(98);
+		for (l = j - 1; l >= 0; l--)
 		{
-			free(r);
-			printf("Error\n"), exit(98);
-		}
-		a = s1[l1] - '0';
-		c = 0;
-
-		for (l2 = _strlen(s2) - 1; l2 >= 0; l2--)
-		{
-			if (!_isdigit(s2[l2]))
+			if (s2[l] < '0' || s2[l] > '9')
+				free(n), printf("Error\n"), exit(98);
+			value = (s1[i] - '0') * (s2[l] - '0');
+			n[i + l + 1] += value;
+			if (n[i + l + 1] > 9)
 			{
-				free(r);
-				printf("Error\n"), exit(98);
+				value = n[i + l + 1];
+				n[i + l + 1] %= 10;
+				n[i + l] += value / 10;
 			}
-			b = s2[l2] - '0';
-
-			c += r[l1 + l2 + 1] + (a * b);
-			r[l1 + l2 + 1] = c % 10;
-
-			c /= 10;
 		}
-		if (c)
-			r[l1 + l2 + 1] += c;
 	}
-	return (r);
-}
 
+	for (i = 0; i < k - 1; i++)
+		n[i] += '0';
 
-/**
- * main - multiply two big number strings
- * @argc: the number of arguments
- * @argv: the argument vector
- *
- * Return: Always 0 on success.
- */
-int main(int argc, char **argv)
-{
-	char *r;
-	int a, c, x;
-
-	if (argc != 3)
-		printf("Error\n"), exit(98);
-
-	x = _strlen(argv[1]) + _strlen(argv[2]);
-	r = big_multiply(argv[1], argv[2]);
-	c = 0;
-	a = 0;
-	while (c < x)
-	{
-		if (r[c])
-			a = 1;
-		if (a)
-			_putchar(r[c] + '0');
-		c++;
-	}
-	if (!a)
-		_putchar('0');
-	_putchar('\n');
-	free(r);
-	return (0);
+	return (n);
 }
