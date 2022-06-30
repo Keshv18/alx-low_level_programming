@@ -1,128 +1,128 @@
 #include "main.h"
 
 /**
- * main - Program that mulplies two positive numbers
- * @argc: Number of argumenets
- * @argv: Muldimensional array of arguments
- * Return: Always 0 (Success)
+ * main - multiplies two positive numbers
+ * @argc: argument count
+ * @argv: argument vectors
+ * Return: 0
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-	char b[15000];
-	char *n = b;
-	int i, j;
+	char *f = argv[1];
+	char *s = argv[2];
 
-	if (argc != 3)
+	if (argc != 3 || !onlyNumbers(f) || !onlyNumbers(s))
 	{
 		printf("Error\n");
 		exit(98);
 	}
-	if (argv[1][0] == '0' || argv[2][0] == '0')
-	{
-		putchar('0');
-		putchar(10);
-		return (0);
-	}
-
-	n = big_mult(argv[1], argv[2]);
-
-	for (i = 0, j = 0;; i++)
-	{
-		if (n[i] != '0')
-			j = 1;
-		if (j == 1 && n[i] == '\0')
-			break;
-		if (j == 1)
-			putchar(n[i]);
-	}
-	putchar(10);
-
+	if (*f == 48 || *s == 48)
+		printf("0\n");
+	else
+		multiply(s, f);
 	return (0);
 }
 
 /**
- * _calloc - Function that allocates memory for an array
- * @nmemb: Elements of array
- * @size: Size of data type
- * Return: Void
+ * multiply - multiplies two numbers and displays it
+ * @f: first "number"
+ * @s: second "number"
  */
-void *_calloc(unsigned int nmemb, unsigned int size)
+void multiply(char *f, char *s)
 {
-	unsigned int i;
-	char *p;
+	int i, len1, len2, total, fdigit, sdigit, res = 0, tmp;
+	int *ptr;
 
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-
-	p = malloc(nmemb * size);
-
-	if (p == NULL)
-		return (NULL);
-
-	for (i = 0; i < nmemb * size; i++)
-		p[i] = 0;
-
-	return (p);
+	len1 = _strlen(f);
+	len2 = _strlen(s);
+	tmp = len2;
+	total = len1 + len2;
+	ptr = _calloc(sizeof(int), (len1 + len2));
+	for (len1--; len1 >= 0; len1--)
+	{
+		fdigit = f[len1] - '0';
+		res = 0;
+		len2 = tmp;
+		for (len2--; len2 >= 0; len2--)
+		{
+			sdigit = s[len2] - '0';
+			res += ptr[len2 + len1 + 1] + (fdigit * sdigit);
+			ptr[len1 + len2 + 1] = res % 10;
+			res /= 10;
+		}
+		if (res)
+			ptr[len1 + len2 + 1] = res % 10;
+	}
+	while (*ptr == 0)
+	{
+		ptr++;
+		total--;
+	}
+	for (i = 0; i < total; i++)
+		printf("%i", ptr[i]);
+	printf("\n");
+}
+/**
+ * onlyNumbers - determines if string has only numbers
+ * @c: input string
+ * Return: 0 if false, 1 if true
+ */
+int onlyNumbers(char *c)
+{
+	while (*c)
+	{
+		if (*c < '0' || *c > '9')
+			return (0);
+		c++;
+	}
+	return (1);
 }
 
 /**
- * _strlen - Function that calculates the length of a string
- * @s: String to be checked
- * Return: The lengtht of string or -1 if it fails
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
  */
 int _strlen(char *s)
 {
-	int i;
+	char *p = s;
 
-	if (s == NULL)
-		return (-1);
-
-	for (i = 0; s[i]; i++)
-		;
-
-	return (i);
+	while (*s)
+		s++;
+	return (s - p);
 }
 
 /**
- * big_mult - Function that multiplies two big numbers
- * @s1: String big number 1
- * @s2: String big number 2
- * Return: a result of the two big numbers
+ * _memset - fills memory with a constant byte
+ * @s: memory area
+ * @b: constant byte
+ * @n: bytes of the memory area
+ * Return: pointer to the memory area s
  */
-char *big_mult(char *s1, char *s2)
+char *_memset(char *s, char b, unsigned int n)
 {
-	int i, j, k, l, value;
-	char *n;
+	char *ptr = s;
 
-	i = _strlen(s1);
-	j = _strlen(s2);
-	k = i + j + 1;
-	n = _calloc(k, sizeof(char));
-	if (n == NULL)
-		printf("Error\n"), exit(98);
-	n[k - 1] = '\0';
+	while (n--)
+		*s++ = b;
+	return (ptr);
+}
 
-	for (--i; i >= 0; i--)
-	{
-		if (s1[i] < '0' || s1[i] > '9')
-			free(n), printf("Error\n"), exit(98);
-		for (l = j - 1; l >= 0; l--)
-		{
-			if (s2[l] < '0' || s2[l] > '9')
-				free(n), printf("Error\n"), exit(98);
-			value = (s1[i] - '0') * (s2[l] - '0');
-			n[i + l + 1] += value;
-			if (n[i + l + 1] > 9)
-			{
-				value = n[i + l + 1];
-				n[i + l + 1] %= 10;
-				n[i + l] += value / 10;
-			}
-		}
-	}
+/**
+ * _calloc - allocates memory for an array, using malloc
+ * @nmemb: number of elements of pointer
+ * @size: size of each member
+ * Return: pointer of allocated memory
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	void *ptr;
 
-	for (i = 0; i < k - 1; i++)
-		n[i] += '0';
-
-	return (n);
+	if (!nmemb || !size)
+		return (NULL);
+	ptr = malloc(size * nmemb);
+	if (!ptr)
+		return (NULL);
+	_memset(ptr, 0, size * nmemb);
+	return (ptr);
 }
