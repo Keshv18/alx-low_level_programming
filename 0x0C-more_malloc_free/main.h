@@ -9,5 +9,3 @@ void print_string(char s[]);
 void print_int(unsigned int n);
 int _strlen_recursion(char *s);
 int _putchar(char c);
-int only_nums(char *s)
-int main(int argc, char *argv[])
