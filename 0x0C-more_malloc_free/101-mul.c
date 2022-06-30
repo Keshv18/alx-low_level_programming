@@ -1,87 +1,87 @@
-#include <stdlib.h>
-#include "coding.h"
+#include "main.h"
 #include <stdio.h>
-
-int _atoi(char *s);
-int _strlen(char *s);
+#include <stdlib.h>
+#include <string.h>
 /**
- * main - function with two arguments
- * @argc: argument count
- * @argv: argument value
- *
- * Description: program that multiplies two positive numbers
- * Return: value
- */
-int main(int argc, char *argv[])
-{
-	int count, len1, len2, temp1, temp2, *array, *result;
-
-	if (argc != 3)
-	{
-		printf("Error\n");
-		exit (98);
-	}
-
-	len1 = _strlen(argv[1]);
-	len2 = _strlen(argv[2]);
-	t_len = len1 + len2 - 1;
-
-	array = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (array == NULL)
-		return (NULL);
-
-	len1 -= 1;
-	len2 -= 1;
-	for (count = 1; argv[count] != '\0', count++)
-	{
-		for (; argv[1][len1]; len1--)
-		{
-			temp1 = argv[1][len1 - 1] - '0';;
-		}
-		for (; argv[2][len2]; len2--)
-		{
-			temp2 = argv[2][len2 - 1] - '0';
-		}
-		for (; array[t_len] > 0
-		if ((temp1 * temp2) > 9)
-			array[
-	}
-}
-
-int _atoi(char *s)
-{
-	int i, sign, numb;
-
-	i = 0;
-	sign = 1;
-	numb = 0;
-
-	while (s[i] != '\0')
-	{
-		if (s[i] == '-')
-			sign *= -1;
-		if (s[i] >= '0' && s[i] <= '9')
-		{
-			while (s[i] >= '0' && s[i] <= '9')
-			{
-				numb = (s[i] - '0') * sign + numb * 10;
-				i++;
-			}
-			break;
-		}
-		i++;
-	}
-	return (numb);
-}
-
-int _strlen(char *s)
+* _isNum - check if is a number
+*@num: string to check
+*Return: 1 is numm, 0 not num
+*/
+int _isNum(char *num)
 {
 	int i;
 
-	i = 0;
-	while (*(s + i) != '\0')
+	for (i = 0; num[i] != '\0'; i++)
 	{
-		i++;
+		if (num[i] < '0' || num[i] > '9')
+			return (0);
 	}
-	return (i);
+	return (1);
 }
+
+/**
+* *_memset - copies a character to the firstn characters of the string pointed
+*@s: original string
+*@b: value to remplace
+*@n: number of bytes
+*Return: s (string modify)
+*/
+char *_memset(char *s, char b, unsigned int n)
+{
+	unsigned int i;
+
+	for (i = 0; i < n; i++)
+		s[i] = b;
+	return (s);
+}
+
+/**
+* _strlen - returns the lenght of a string
+*@s: poiter of character
+*Return: the length of a string
+*/
+int _strlen(char *s)
+{
+	int len;
+
+	len = 0;
+	while (*(s + len) != '\0')
+		len++;
+	return (len);
+}
+
+/**
+* main - multiple 2 positive numbers
+*@argc: argument counter
+*@argv: number to multiply
+*Return: 0 (success)
+*/
+int main(int argc, char *argv[])
+{
+	int length, c, prod, i, j, l1, l2;
+	int *res;
+
+	if ((argc != 3 || !(_isNum(argv[1]))) || !(_isNum(argv[2])))
+		puts("Error"), exit(98);
+	l1 = _strlen(argv[1]), l2 = _strlen(argv[2]);
+	length = l1 + l2;
+	res = calloc(length, sizeof(int *));
+	if (res == NULL)
+		puts("Error"), exit(98);
+	for (i = l2 - 1; i > -1; i--)
+	{
+		c = 0;
+		for (j = l1; j > -1; j--)
+		{
+			prod = (argv[2][i] - '0') * (argv[1][j] - '0');
+			c = (prod / 10);
+			res[(i + j) + 1] += (prod % 10);
+			if (res[(i + j) + 1] > 9)
+			{
+				res[i + j] += res[(i + j) + 1] / 10;
+				res[(i + j) + 1] = res[(i + j) + 1] % 10;
+			}
+			res[(i + j) + 1] += c;
+		}
+	}
+
